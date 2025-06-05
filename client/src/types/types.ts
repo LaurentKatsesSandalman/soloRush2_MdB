@@ -45,17 +45,9 @@ contrainte_maxlife?: number;
 contrainte_mincom?: number;
 contrainte_maxcom?: number;
 contrainte_zobject?: number;
-
-
-
-
-
-
-
-
-
-
 }
+
+
 export interface Zobject {
 zobject_id: number;
 zobject_name: string;

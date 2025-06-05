@@ -18,7 +18,7 @@ exit3_desc?: string;
 exit3_contrainte?: number;
 exit3_ztarget?: number;
 }
-export interface Effect extends RowDataPacket{
+export interface Zeffect extends RowDataPacket{
 zeffect_id: number;
 zeffect_type: string;
 zeffect_life?: number;
@@ -39,7 +39,7 @@ zeffect_zobject?: number;
 
 
 
-export interface Constraint extends RowDataPacket{
+export interface Contrainte extends RowDataPacket{
 contrainte_id: number;
 contrainte_minlife?: number;
 contrainte_maxlife?: number;
@@ -57,7 +57,7 @@ contrainte_zobject?: number;
 
 
 }
-export interface Object extends RowDataPacket{
+export interface Zobject extends RowDataPacket{
 zobject_id: number;
 zobject_name: string;
 zobject_image?: string;

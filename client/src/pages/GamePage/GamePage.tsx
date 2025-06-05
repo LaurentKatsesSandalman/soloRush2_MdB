@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAppContext } from "../../context/AppContext";
 import styles from "./GamePage.module.css";
-import type { Chapter, Constraint } from "../../types/types";
+import type { Chapter, Contrainte, Zobject, Zeffect } from "../../types/types";
 import StoryButton from "../../components/Buttons/StoryButton";
 
 
@@ -15,6 +15,11 @@ function GamePage() {
         exit1_id: 1,
         exit1_desc: "error",
     }
+
+    const badConstraint = {
+    contrainte_id: 0
+}
+
     const [currentChapterID, setCurrentChapterID] = useState<Number>(1)
     const [currentChapter, setCurrentChapter] = useState<Chapter>(firstChapter)
     const urlStory = `http://localhost:3310/api/chapters/${currentChapterID}`
@@ -52,26 +57,25 @@ useEffect(() => {
 setPotentialExit(potentialExitStart)
 
 setPotentialExit((prev)=>prev.filter((exit)=>exit.exit_id!==null))
-const bannedID = []
-for (const exit of potentialExit ){
-    if(exit.exit_contrainte){
-        const exitConstraint:Constraint|undefined = fetch(`http://localhost:3310/api/constraints/${exit.exit_contrainte}`).then((response) => response.json())
-        if(exitConstraint){
-        if(exitConstraint.contrainte_minlife && life<exitConstraint.contrainte_minlife){bannedID.push(exit.exit_id)}
-        if(exitConstraint.contrainte_maxlife && life>exitConstraint.contrainte_maxlife){bannedID.push(exit.exit_id)}
-        if(exitConstraint.contrainte_mincom && comPoints<exitConstraint.contrainte_mincom){bannedID.push(exit.exit_id)}
-        if(exitConstraint.contrainte_maxcom && comPoints>exitConstraint.contrainte_maxcom){bannedID.push(exit.exit_id)}
-        if(exitConstraint.contrainte_zobject){
-            const constraintObject:Object
-        }
-        }
-    }
-}
+const bannedID:number[] = []
+// for (const exit of potentialExit ){
+//     if(exit.exit_id && exit.exit_contrainte){
+//         const exitConstraint:Contrainte = fetch(`http://localhost:3310/api/constraints/${exit.exit_contrainte}`).then((response) => response.json())
+        
+//         if(exitConstraint){
+//         if(exitConstraint.contrainte_minlife && life<exitConstraint.contrainte_minlife){bannedID.push(exit.exit_id)}
+//         if(exitConstraint.contrainte_maxlife && life>exitConstraint.contrainte_maxlife){bannedID.push(exit.exit_id)}
+//         if(exitConstraint.contrainte_mincom && comPoints<exitConstraint.contrainte_mincom){bannedID.push(exit.exit_id)}
+//         if(exitConstraint.contrainte_maxcom && comPoints>exitConstraint.contrainte_maxcom){bannedID.push(exit.exit_id)}
+//         if(exitConstraint.contrainte_zobject && !(inventory.includes(exitConstraint.contrainte_zobject)) ){bannedID.push(exit.exit_id)}
+//         }
+//     }
+// }
 
+// setPotentialExit((prev)=>prev.filter((exit)=>!bannedID.includes(exit.exit_id) ))
 
 },[currentChapterID])
         
-    const realExit= potentialExit.filter((exit)=>exit.exit_id!==null)
 
     return (
         <>
@@ -81,7 +85,7 @@ for (const exit of potentialExit ){
                     <p>{currentChapter.chapter_desc}</p>
                 </div>
                 <div className={styles.buttondiv}>
-{realExit.map((exit)=>(
+{potentialExit.map((exit)=>(
     <StoryButton key={exit.index} contrainte={exit.exit_contrainte} desc={exit.exit_desc} id={exit.exit_id} target={exit.exit_ztarget} setCurrentChapterID={setCurrentChapterID}/>
 ))
 
