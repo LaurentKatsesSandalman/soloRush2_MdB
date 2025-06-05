@@ -2,9 +2,13 @@ import express from "express";
 import cors from "cors";
 import "dotenv/config";
 import { logErrors } from "./middlewares/logErrors.ts";
-// import userRouter from "./routes/user.routes.ts";
-// import formRouter from "./routes/form.routes.ts";
-// import answerRouter from "./routes/answer.routes.ts";
+import chapterRouter from "./routes/chapter.route.ts";
+import effectRouter from "./routes/effect.route.ts";
+import constraintRouter from "./routes/constraint.route.ts";
+import objectRouter from "./routes/object.route.ts";
+import fightRouter from "./routes/fight.route.ts";
+import targetRouter from "./routes/target.route.ts";
+
 
 const app = express();
 
@@ -21,7 +25,12 @@ if (process.env.CLIENT_URL != null) {
 app.use(express.json());
 /* ************************************************************************* */
 
-//app.use("/api/forms", formRouter);
+app.use("/api/chapters", chapterRouter);
+app.use("/api/effects", effectRouter);
+app.use("/api/constraints", constraintRouter);
+app.use("/api/objects", objectRouter);
+app.use("/api/fights", fightRouter);
+app.use("/api/target", targetRouter);
 
 
 // Mount the logErrors middleware globally
