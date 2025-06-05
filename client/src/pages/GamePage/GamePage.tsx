@@ -26,44 +26,70 @@ function GamePage() {
         contrainte_id: 0
     }
 
-    const [currentChapterID, setCurrentChapterID] = useState<Number>(1)
-    const [currentChapter, setCurrentChapter] = useState<Chapter>(firstChapter)
-    const urlStory = `http://localhost:3310/api/chapters/${currentChapterID}`
-
-    fetch(urlStory)
-        .then((response) => response.json())
-        .then((data) => setCurrentChapter(data))
-        .catch((err) => console.error(err));
-
-    const potentialExitStart = [
+    const potentialExitEmpty = [
         {
             index: 1,
-            exit_contrainte: currentChapter.exit1_contrainte,
-            exit_desc: currentChapter.exit1_desc,
-            exit_id: currentChapter.exit1_id,
-            exit_ztarget: currentChapter.exit1_ztarget
+
+            exit_desc: "desc1",
+            exit_id: 2,
+
         }, {
             index: 2,
-            exit_contrainte: currentChapter.exit2_contrainte,
-            exit_desc: currentChapter.exit2_desc,
-            exit_id: currentChapter.exit2_id,
-            exit_ztarget: currentChapter.exit2_ztarget
+
+            exit_desc: "desc2",
+            exit_id: 2,
+
         }, {
             index: 3,
-            exit_contrainte: currentChapter.exit3_contrainte,
-            exit_desc: currentChapter.exit3_desc,
-            exit_id: currentChapter.exit3_id,
-            exit_ztarget: currentChapter.exit3_ztarget
+
+            exit_desc: "desc3",
+            exit_id: 2,
+
         },
     ]
 
-    const [potentialExit, setPotentialExit] = useState(potentialExitStart)
+    const [currentChapterID, setCurrentChapterID] = useState<Number>(1)
+    const [currentChapter, setCurrentChapter] = useState<Chapter>(firstChapter)
+    const [potentialExit, setPotentialExit] = useState(potentialExitEmpty);
 
     useEffect(() => {
+        const urlStory = `http://localhost:3310/api/chapters/${currentChapterID}`;
+        fetch(urlStory)
+            .then((response) => response.json())
+            .then((data) => setCurrentChapter(data))
+            .catch((err) => console.error(err));
+    }, [currentChapterID]);
+
+
+
+
+
+    useEffect(() => {
+        const potentialExitStart = [
+            {
+                index: 1,
+                exit_contrainte: currentChapter.exit1_contrainte,
+                exit_desc: currentChapter.exit1_desc,
+                exit_id: currentChapter.exit1_id,
+                exit_ztarget: currentChapter.exit1_ztarget
+            }, {
+                index: 2,
+                exit_contrainte: currentChapter.exit2_contrainte,
+                exit_desc: currentChapter.exit2_desc,
+                exit_id: currentChapter.exit2_id,
+                exit_ztarget: currentChapter.exit2_ztarget
+            }, {
+                index: 3,
+                exit_contrainte: currentChapter.exit3_contrainte,
+                exit_desc: currentChapter.exit3_desc,
+                exit_id: currentChapter.exit3_id,
+                exit_ztarget: currentChapter.exit3_ztarget
+            },
+        ]
         setPotentialExit(potentialExitStart)
         console.log("before", potentialExit)
 
-        setPotentialExit((prev) => prev.filter((exit) => exit.exit_id !== undefined))
+        setPotentialExit((prev) => prev.filter((exit) => exit.exit_id !== null))
         console.log("after", potentialExit)
         const bannedID: number[] = []
         // for (const exit of potentialExit ){
@@ -82,7 +108,7 @@ function GamePage() {
 
         // setPotentialExit((prev)=>prev.filter((exit)=>!bannedID.includes(exit.exit_id) ))
 
-    }, [currentChapterID])
+    }, [currentChapter])
 
 
     return (
