@@ -3,19 +3,23 @@ import { useAppContext } from "../../context/AppContext";
 
 import styles from "./StoryButton.module.css";
 
-interface StoryButtonProps{
- contrainte: number|undefined;
-    desc: string|undefined;
-    id:number|undefined;
-    target: number|undefined;
-    setCurrentChapterID:React.Dispatch<React.SetStateAction<Number>>;
+interface StoryButtonProps {
+    contrainte: number | undefined;
+    desc: string | undefined;
+    id: number | undefined;
+    target: number | undefined;
+    setCurrentChapterID: React.Dispatch<React.SetStateAction<Number>>;
 }
 
-function StoryButton({contrainte, desc, id, target,setCurrentChapterID }:StoryButtonProps) {
+function StoryButton({ contrainte, desc, id, target, setCurrentChapterID }: StoryButtonProps) {
 
-    function handleOnClick(){
-        if(id)
-        {setCurrentChapterID(id)}
+    function handleOnClick() {
+        console.log("id", id)
+        if (id) {
+            setCurrentChapterID(id)
+            console.log("currentchapterid?")
+        }
+
     }
 
     return (<>
