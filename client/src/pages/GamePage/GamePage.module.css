@@ -1,0 +1,35 @@
+.storydiv{
+    width:95%;
+    min-height: 300px;
+    background-color: var(--color-bg-ig);
+color: var(--color-text-ig);
+    font-family: var(--font-ingame);
+    margin:10px auto 10px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.descdiv{
+    
+}
+
+.buttondiv{
+    display: flex;
+    justify-content: space-around;
+}
+
+.buttondiv button{
+background-color: var(--color-button-ig);
+width: 30%;
+text-align: center;
+}
+
+.actiondiv{
+    width:95%;
+    min-height: 300px;
+    background-color: var(--color-bg-ig);
+    color: var(--color-text-ig);
+    font-family: var(--font-ingame);
+    margin:10px auto 10px auto;
+}

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAppContext } from "../../context/AppContext";
 
-import styles from "./GamePage.module.css";
+import styles from "./Home.module.css";
 
 
 function Home() {

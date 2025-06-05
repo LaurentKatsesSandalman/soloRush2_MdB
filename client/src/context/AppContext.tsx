@@ -6,6 +6,10 @@ export interface AppContextType {
 	setLife: React.Dispatch<React.SetStateAction<number>>;
     story:number;
     setStory:React.Dispatch<React.SetStateAction<number>>;
+	comPoints:number;
+	setComPoints:React.Dispatch<React.SetStateAction<number>>;
+	inventory:number[];
+	setInventory:React.Dispatch<React.SetStateAction<number[]>>;
 }
 
 interface AppProviderProps {
@@ -18,9 +22,11 @@ export function AppProvider({ children }: AppProviderProps) {
 	//States you want to pass in the context
 	const [life, setLife] = useState<number>(100);
     const [story, setStory] = useState<number>(0);
+	const [comPoints, setComPoints] = useState<number>(0)
+	const [inventory, setInventory] = useState<number[]>([])
 
 	return (
-		<AppContext.Provider value={{ life, setLife, story, setStory }}>
+		<AppContext.Provider value={{ life, setLife, story, setStory, comPoints, setComPoints, inventory, setInventory }}>
 			{children}
 		</AppContext.Provider>
 	);

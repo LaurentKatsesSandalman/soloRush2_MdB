@@ -3,7 +3,7 @@
 
 :root {
 	/** Fonts **/
-	--font-ingame: "VT32", sans-serif;
+	--font-ingame: "VT323", sans-serif;
 	--font-outgame: "Sawarabi Gothic", serif;
 
 	/** Texts **/
@@ -17,6 +17,7 @@
 	/** Colors **/
 	--color-bg-out: #e9eef6;
     --color-bg-ig:black;
+	--color-button-ig:blue;
 
 	/** Sizes **/
 	--card-max-width: 1000px;

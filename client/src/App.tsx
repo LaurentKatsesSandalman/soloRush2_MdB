@@ -6,7 +6,7 @@ import "./App.css";
 function App() {
     return (
         <AppProvider>
-            <TopBar />
+            {/* <TopBar /> */}
             <main>
                 <Outlet />
             </main>

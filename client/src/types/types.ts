@@ -1,6 +1,5 @@
-import { RowDataPacket } from "mysql2";
 
-export interface Chapter extends RowDataPacket{
+export interface Chapter {
 story_id: number;
 chapter_id: number;
 chapter_desc: string;
@@ -18,7 +17,7 @@ exit3_desc?: string;
 exit3_contrainte?: number;
 exit3_ztarget?: number;
 }
-export interface Effect extends RowDataPacket{
+export interface Zeffect {
 zeffect_id: number;
 zeffect_type: string;
 zeffect_life?: number;
@@ -39,7 +38,7 @@ zeffect_zobject?: number;
 
 
 
-export interface Constraint extends RowDataPacket{
+export interface Contrainte {
 contrainte_id: number;
 contrainte_minlife?: number;
 contrainte_maxlife?: number;
@@ -57,7 +56,7 @@ contrainte_zobject?: number;
 
 
 }
-export interface Object extends RowDataPacket{
+export interface Zobject {
 zobject_id: number;
 zobject_name: string;
 zobject_image?: string;
@@ -75,7 +74,7 @@ zobject_range?: number;
 
 
 }
-export interface Fight extends RowDataPacket{
+export interface Fight {
 fight_id: number;
 fight_name: string;
 fight_damage: number;
@@ -96,7 +95,7 @@ fight_zeffect?: number;
 
 
 
-export interface Target extends RowDataPacket{
+export interface Target {
 ztarget_id: number;
 ztarget_type: string;
 zobject_id?: number;
