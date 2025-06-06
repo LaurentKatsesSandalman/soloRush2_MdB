@@ -30,7 +30,7 @@ app.use("/api/effects", effectRouter);
 app.use("/api/constraints", constraintRouter);
 app.use("/api/objects", objectRouter);
 app.use("/api/fights", fightRouter);
-app.use("/api/target", targetRouter);
+app.use("/api/targets", targetRouter);
 
 
 // Mount the logErrors middleware globally

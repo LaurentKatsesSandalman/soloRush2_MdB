@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useAppContext } from "../../context/AppContext";
 import styles from "./GamePage.module.css";
-import type { Chapter, Contrainte, Zobject, Zeffect } from "../../types/types";
+import type { Chapter, Contrainte } from "../../types/types";
 import StoryButton from "../../components/Buttons/StoryButton";
+import ActionDiv from "../../components/ActionDiv/ActionDiv";
 
 
 function GamePage() {
-    const { life, setLife, comPoints, setComPoints, inventory, setInventory } = useAppContext()
+    const { life,  comPoints,  inventory } = useAppContext()
 
     const firstChapter = {
         story_id: 1,
@@ -22,9 +23,17 @@ function GamePage() {
         exit2_ztarget: 1,
     }
 
-    const badConstraint = {
-        contrainte_id: 0
-    }
+    // const badConstraint = {
+    //     contrainte_id: 0
+    // }
+
+    interface PotentialExitInterface {
+            index: number;
+            exit_contrainte?:number;
+            exit_desc?: string;
+            exit_id?: number;
+            exit_ztarget?:number;
+        }
 
     const potentialExitEmpty = [
         {
@@ -41,7 +50,7 @@ function GamePage() {
 
         }, {
             index: 3,
-
+ 
             exit_desc: "desc3",
             exit_id: 2,
 
@@ -50,7 +59,7 @@ function GamePage() {
 
     const [currentChapterID, setCurrentChapterID] = useState<Number>(1)
     const [currentChapter, setCurrentChapter] = useState<Chapter>(firstChapter)
-    const [potentialExit, setPotentialExit] = useState(potentialExitEmpty);
+    const [potentialExit, setPotentialExit] = useState<PotentialExitInterface[]>(potentialExitEmpty);
 
     async function getExitConstraint(id: number) {
         const response = await fetch(`http://localhost:3310/api/constraints/${id}`)
@@ -140,11 +149,12 @@ function GamePage() {
                     ))
 
                     }
-                </div>
-            </div>
+                </div></div>
             <div className={styles.actiondiv}>
-                <p>This is action div</p>
+                <ActionDiv />
             </div>
+
+
         </>)
 }
 

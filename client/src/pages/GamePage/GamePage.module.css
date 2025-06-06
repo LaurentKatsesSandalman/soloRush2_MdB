@@ -10,8 +10,18 @@ color: var(--color-text-ig);
     justify-content: space-between;
 }
 
-.descdiv{
+/* .descdiv{
     
+    
+} */
+
+.actiondiv{
+    width:95%;
+    min-height: 300px;
+    background-color: var(--color-bg-ig);
+    color: var(--color-text-ig);
+    font-family: var(--font-ingame);
+    margin:10px auto 10px auto;
 }
 
 .buttondiv{
@@ -25,11 +35,3 @@ width: 30%;
 text-align: center;
 }
 
-.actiondiv{
-    width:95%;
-    min-height: 300px;
-    background-color: var(--color-bg-ig);
-    color: var(--color-text-ig);
-    font-family: var(--font-ingame);
-    margin:10px auto 10px auto;
-}
