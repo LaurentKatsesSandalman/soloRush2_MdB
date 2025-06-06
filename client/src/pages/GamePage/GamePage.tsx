@@ -138,7 +138,7 @@ function GamePage() {
 
     return (
         <>
-            <h2>Title</h2>
+            <h2>RETRO MdB</h2>
             <div className={styles.storydiv}>
                 <div className={styles.descdiv}>
                     <p>{currentChapter.chapter_desc}</p>

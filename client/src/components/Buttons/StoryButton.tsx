@@ -12,12 +12,13 @@ interface StoryButtonProps {
 }
 
 function StoryButton({ desc, id, target, setCurrentChapterID }: StoryButtonProps) {
-    const { setLife, life, setComPoints, setInventory, MAX_LIFE, setLastEvent } = useAppContext()
+    const { setLife, life, setComPoints, setInventory, MAX_LIFE, setLastEvent, inventory, setSandal } = useAppContext()
     const [consequence, setConsequence] = useState<Target>()
     const [zeffect, setZeffect] = useState<Zeffect>()
     const [fight, setFight] = useState<Fight>()
 
     async function handleOnClick() {
+        if (inventory.includes(3)) { setLife((prev) => prev + 10) }
         if (typeof target === "number") {
             console.log("target is number", target)
             fetch(`http://localhost:3310/api/targets/${target}`)
@@ -35,9 +36,10 @@ function StoryButton({ desc, id, target, setCurrentChapterID }: StoryButtonProps
                                         setLife((prev) => prev + (data.zeffect_life as number))
                                         setLastEvent(`Vous avez perdu ${data.zeffect_life} points de vie`)
                                     }
-                                    if (data.zeffect_com !== undefined && data.zeffect_com < 0) { setComPoints((prev) => prev + (data.zeffect_com as number))
+                                    if (data.zeffect_com !== undefined && data.zeffect_com < 0) {
+                                        setComPoints((prev) => prev + (data.zeffect_com as number))
                                         setLastEvent(`Vous avez perdu ${data.zeffect_life} points de communisme`)
-                                     }
+                                    }
 
                                 })
                                 .catch((err) => console.error(err));
@@ -49,11 +51,13 @@ function StoryButton({ desc, id, target, setCurrentChapterID }: StoryButtonProps
                                 .then((response) => response.json())
                                 .then((data) => {
                                     setZeffect(data)
-                                    if (data.zeffect_life !== undefined && data.zeffect_life > 0) { setLife((prev) => prev + (data.zeffect_life as number)) 
+                                    if (data.zeffect_life !== undefined && data.zeffect_life > 0) {
+                                        setLife((prev) => prev + (data.zeffect_life as number))
                                         setLastEvent(`Vous avez gagné ${data.zeffect_life} points de vie`)
                                     }
-                                    if (data.zeffect_com !== undefined && data.zeffect_com > 0) { setComPoints((prev) => prev + (data.zeffect_com as number)) 
-                                        setLastEvent(`Vous avez gagné ${data.zeffect_life} points de communisme`)
+                                    if (data.zeffect_com !== undefined && data.zeffect_com > 0) {
+                                        setComPoints((prev) => prev + (data.zeffect_com as number))
+                                        setLastEvent(`Vous avez gagné ${data.zeffect_com} points de communisme`)
                                     }
                                 })
                                 .catch((err) => console.error(err));
@@ -78,6 +82,8 @@ function StoryButton({ desc, id, target, setCurrentChapterID }: StoryButtonProps
                             setLife(MAX_LIFE);
                             setComPoints(0);
                             setInventory([]);
+                            setSandal(false);
+                            setLastEvent("");
                             break;
                         }
                         case "GET": {
@@ -102,13 +108,13 @@ function StoryButton({ desc, id, target, setCurrentChapterID }: StoryButtonProps
                 .catch((err) => console.error(err));
 
         }
-
+        else {setLastEvent("")}
         if (id) {
             setCurrentChapterID(id)
 
         }
 
-        if (life<1){
+        if (life < 1) {
             setCurrentChapterID(16)
         }
 

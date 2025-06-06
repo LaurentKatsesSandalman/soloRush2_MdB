@@ -8,8 +8,9 @@ interface ActionDivProps {
 }
 
 function ActionDiv ({}:ActionDivProps){
-    const {life, inventory, comPoints, lastEvent} = useAppContext()
+    const {life, inventory, comPoints, lastEvent, sandal, setSandal} = useAppContext()
     const [inventoryStringArray, setInventoryStringArray]=useState<string[]>([])
+    // const [sandal, setSandal] = useState<boolean>(false)
 
     useEffect(()=>{
         setInventoryStringArray([])
@@ -25,13 +26,14 @@ for (const object of inventory){
     })
     .catch((err) => console.error(err));
 }
-
+    if(inventory.includes(3)){setSandal(true)}
     },[inventory])
 
     const inventoryString = inventoryStringArray.join(", ")
+   
 
     return (    <div className={styles.actiondiv}>
-                <p>Vie actuelle : {life}</p>
+                {sandal?(<p>Vie actuelle : {life} (vous portez des sandales)</p>):(<p>Vie actuelle : {life}</p>)}
                 <p>Niveau de communisme : {comPoints}</p>
                 <p>Inventaire : {inventoryString}</p>
                 <p>{lastEvent}</p>

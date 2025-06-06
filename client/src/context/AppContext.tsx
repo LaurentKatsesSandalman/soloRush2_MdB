@@ -13,6 +13,8 @@ export interface AppContextType {
 	setInventory: React.Dispatch<React.SetStateAction<number[]>>;
 	lastEvent:string;
 	setLastEvent: React.Dispatch<React.SetStateAction<string>>;
+	sandal:boolean;
+	setSandal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface AppProviderProps {
@@ -29,9 +31,10 @@ export function AppProvider({ children }: AppProviderProps) {
 	const [comPoints, setComPoints] = useState<number>(0)
 	const [inventory, setInventory] = useState<number[]>([])
 	const [lastEvent, setLastEvent] = useState<string>("")
+	const [sandal, setSandal] = useState<boolean>(false)
 
 	return (
-		<AppContext.Provider value={{ life, setLife, story, setStory, comPoints, setComPoints, inventory, setInventory, MAX_LIFE, lastEvent, setLastEvent }}>
+		<AppContext.Provider value={{ life, setLife, story, setStory, comPoints, setComPoints, inventory, setInventory, MAX_LIFE, lastEvent, setLastEvent, sandal, setSandal }}>
 			{children}
 		</AppContext.Provider>
 	);
