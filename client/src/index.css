@@ -8,7 +8,7 @@
 
 	/** Texts **/
 	--text-size-out: 16px;
-    --color-text-out: black;
+	--color-text-out: black;
 	--color-text-ig: white;
 	--color-text-ig-item: rgb(68, 197, 236);
 	--color-text-ig-loss: red;
@@ -16,8 +16,8 @@
 
 	/** Colors **/
 	--color-bg-out: rgb(238, 53, 222);
-    --color-bg-ig:black;
-	--color-button-ig:blue;
+	--color-bg-ig: black;
+	--color-button-ig: blue;
 
 	/** Sizes **/
 	--card-max-width: 1000px;
@@ -78,4 +78,10 @@ button {
 	border: none;
 	color: inherit;
 	font: inherit;
+}
+
+@media screen and (min-width: 750px) {
+	html {
+		font-size: calc(var(--text-size-out)*1.5);
+	}
 }

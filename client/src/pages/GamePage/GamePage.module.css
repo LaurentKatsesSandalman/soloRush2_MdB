@@ -1,44 +1,52 @@
-.storydiv{
-    width:min(95%,750px);
+.storydiv {
+    width: min(95%, 750px);
     min-height: 300px;
     background-color: var(--color-bg-ig);
-color: var(--color-text-ig);
+    color: var(--color-text-ig);
     font-family: var(--font-ingame);
-    margin:10px auto 10px auto;
+    margin: 10px auto 10px auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 10px;
 }
 
-h2{
+h2 {
     font-family: var(--font-ingame);
     font-size: 5rem;
     text-align: center;
 }
+
 /* .descdiv{
     
     
 } */
 
-.actiondiv{
-    width:min(95%,750px);
+.actiondiv {
+    width: min(95%, 750px);
     min-height: 300px;
     background-color: var(--color-bg-ig);
     color: var(--color-text-ig);
     font-family: var(--font-ingame);
-    margin:10px auto 10px auto;
+    margin: 10px auto 10px auto;
     padding: 10px;
 }
 
-.buttondiv{
+.buttondiv {
     display: flex;
     justify-content: space-around;
 }
 
-.buttondiv button{
-background-color: var(--color-button-ig);
-width: 30%;
-text-align: center;
+.buttondiv button {
+    background-color: var(--color-button-ig);
+    width: 30%;
+    text-align: center;
 }
 
+@media screen and (min-width: 750px) {
+    .storydiv {
+
+        min-height: 400px;
+
+    }
+}
