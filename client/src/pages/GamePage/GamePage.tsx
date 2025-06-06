@@ -6,7 +6,7 @@ import StoryButton from "../../components/Buttons/StoryButton";
 
 
 function GamePage() {
-    // const {life, setLife, comPoints, setComPoints, inventory, setInventory} = useAppContext()
+    const { life, setLife, comPoints, setComPoints, inventory, setInventory } = useAppContext()
 
     const firstChapter = {
         story_id: 1,
@@ -52,6 +52,12 @@ function GamePage() {
     const [currentChapter, setCurrentChapter] = useState<Chapter>(firstChapter)
     const [potentialExit, setPotentialExit] = useState(potentialExitEmpty);
 
+    async function getExitConstraint(id: number) {
+        const response = await fetch(`http://localhost:3310/api/constraints/${id}`)
+        const exitConstraint: Contrainte = await response.json();
+        return exitConstraint
+    }
+
     useEffect(() => {
         const urlStory = `http://localhost:3310/api/chapters/${currentChapterID}`;
         fetch(urlStory)
@@ -65,50 +71,60 @@ function GamePage() {
 
 
     useEffect(() => {
-        const potentialExitStart = [
-            {
-                index: 1,
-                exit_contrainte: currentChapter.exit1_contrainte,
-                exit_desc: currentChapter.exit1_desc,
-                exit_id: currentChapter.exit1_id,
-                exit_ztarget: currentChapter.exit1_ztarget
-            }, {
-                index: 2,
-                exit_contrainte: currentChapter.exit2_contrainte,
-                exit_desc: currentChapter.exit2_desc,
-                exit_id: currentChapter.exit2_id,
-                exit_ztarget: currentChapter.exit2_ztarget
-            }, {
-                index: 3,
-                exit_contrainte: currentChapter.exit3_contrainte,
-                exit_desc: currentChapter.exit3_desc,
-                exit_id: currentChapter.exit3_id,
-                exit_ztarget: currentChapter.exit3_ztarget
-            },
-        ]
-        setPotentialExit(potentialExitStart)
-        console.log("before", potentialExit)
+        const checkConstraints = async () => {
 
-        setPotentialExit((prev) => prev.filter((exit) => exit.exit_id !== null))
-        console.log("after", potentialExit)
-        const bannedID: number[] = []
-        // for (const exit of potentialExit ){
-        //     if(exit.exit_id && exit.exit_contrainte){
-        //         const exitConstraint:Contrainte = fetch(`http://localhost:3310/api/constraints/${exit.exit_contrainte}`).then((response) => response.json())
+            const potentialExitStart = [
+                {
+                    index: 1,
+                    exit_contrainte: currentChapter.exit1_contrainte,
+                    exit_desc: currentChapter.exit1_desc,
+                    exit_id: currentChapter.exit1_id,
+                    exit_ztarget: currentChapter.exit1_ztarget
+                }, {
+                    index: 2,
+                    exit_contrainte: currentChapter.exit2_contrainte,
+                    exit_desc: currentChapter.exit2_desc,
+                    exit_id: currentChapter.exit2_id,
+                    exit_ztarget: currentChapter.exit2_ztarget
+                }, {
+                    index: 3,
+                    exit_contrainte: currentChapter.exit3_contrainte,
+                    exit_desc: currentChapter.exit3_desc,
+                    exit_id: currentChapter.exit3_id,
+                    exit_ztarget: currentChapter.exit3_ztarget
+                },
+            ];
 
-        //         if(exitConstraint){
-        //         if(exitConstraint.contrainte_minlife && life<exitConstraint.contrainte_minlife){bannedID.push(exit.exit_id)}
-        //         if(exitConstraint.contrainte_maxlife && life>exitConstraint.contrainte_maxlife){bannedID.push(exit.exit_id)}
-        //         if(exitConstraint.contrainte_mincom && comPoints<exitConstraint.contrainte_mincom){bannedID.push(exit.exit_id)}
-        //         if(exitConstraint.contrainte_maxcom && comPoints>exitConstraint.contrainte_maxcom){bannedID.push(exit.exit_id)}
-        //         if(exitConstraint.contrainte_zobject && !(inventory.includes(exitConstraint.contrainte_zobject)) ){bannedID.push(exit.exit_id)}
-        //         }
-        //     }
-        // }
+            setPotentialExit(potentialExitStart);
 
-        // setPotentialExit((prev)=>prev.filter((exit)=>!bannedID.includes(exit.exit_id) ))
+            setPotentialExit((prev) => prev.filter((exit) => exit.exit_id !== null));
 
-    }, [currentChapter])
+            const bannedID: number[] = [];
+
+            for (const exit of potentialExitStart) {
+                if (exit.exit_id && exit.exit_contrainte) {
+                    try {
+                        const exitConstraint: Contrainte = await getExitConstraint(exit.exit_contrainte);
+
+                        if (exitConstraint) {
+                            if (exitConstraint.contrainte_minlife && life < exitConstraint.contrainte_minlife) bannedID.push(exit.index);
+                            if (exitConstraint.contrainte_maxlife && life > exitConstraint.contrainte_maxlife) bannedID.push(exit.index);
+                            if (exitConstraint.contrainte_mincom && comPoints < exitConstraint.contrainte_mincom) bannedID.push(exit.index);
+                            if (exitConstraint.contrainte_maxcom && comPoints > exitConstraint.contrainte_maxcom) bannedID.push(exit.index);
+                            if (exitConstraint.contrainte_zobject && !inventory.includes(exitConstraint.contrainte_zobject)) bannedID.push(exit.index);
+                        }
+
+                    } catch (error) {
+                        console.error("Erreur lors de la récupération de la contrainte", error);
+                    }
+                }
+            }
+
+            setPotentialExit((prev) => prev.filter((exit) => !bannedID.includes(exit.index)));
+        };
+
+        checkConstraints();
+    }, [currentChapter]);
 
 
     return (

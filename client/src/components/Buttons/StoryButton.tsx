@@ -14,10 +14,10 @@ interface StoryButtonProps {
 function StoryButton({ contrainte, desc, id, target, setCurrentChapterID }: StoryButtonProps) {
 
     function handleOnClick() {
-        console.log("id", id)
+        //  console.log("id", id)
         if (id) {
             setCurrentChapterID(id)
-            console.log("currentchapterid?")
+            //   console.log("currentchapterid?")
         }
 
     }

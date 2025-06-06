@@ -4,12 +4,12 @@ import { createContext, useContext, useState } from "react";
 export interface AppContextType {
 	life: number;
 	setLife: React.Dispatch<React.SetStateAction<number>>;
-    story:number;
-    setStory:React.Dispatch<React.SetStateAction<number>>;
-	comPoints:number;
-	setComPoints:React.Dispatch<React.SetStateAction<number>>;
-	inventory:number[];
-	setInventory:React.Dispatch<React.SetStateAction<number[]>>;
+	story: number;
+	setStory: React.Dispatch<React.SetStateAction<number>>;
+	comPoints: number;
+	setComPoints: React.Dispatch<React.SetStateAction<number>>;
+	inventory: number[];
+	setInventory: React.Dispatch<React.SetStateAction<number[]>>;
 }
 
 interface AppProviderProps {
@@ -21,7 +21,7 @@ const AppContext = createContext<AppContextType | null>(null);
 export function AppProvider({ children }: AppProviderProps) {
 	//States you want to pass in the context
 	const [life, setLife] = useState<number>(100);
-    const [story, setStory] = useState<number>(0);
+	const [story, setStory] = useState<number>(0);
 	const [comPoints, setComPoints] = useState<number>(0)
 	const [inventory, setInventory] = useState<number[]>([])
 
