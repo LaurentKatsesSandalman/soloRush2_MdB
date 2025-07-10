@@ -15,8 +15,8 @@ RUN npm install
 COPY . .
 
 # Exposer le port
-EXPOSE 3000
+EXPOSE 3001
 
 
 # Commande de démarrage en mode développement
-CMD ["npm", "run", "dev"]
+CMD ["npx", "tsx", "--watch", "src/app.ts"]
