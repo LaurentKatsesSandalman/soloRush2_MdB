@@ -48,3 +48,5 @@ export function useAppContext() {
 	}
 	return context;
 }
+
+export { AppContext };
