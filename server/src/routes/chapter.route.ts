@@ -2,7 +2,7 @@ import express from "express";
 
 import {
     getThisChapter
-} from "./../controllers/chapter.controller.ts";
+} from "./../controllers/chapter.controller";
 
 const router = express.Router();
 

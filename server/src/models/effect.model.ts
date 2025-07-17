@@ -1,5 +1,5 @@
 import { ResultSetHeader, RowDataPacket } from "mysql2";
-import database from "./db_model.ts";
+import database from "./db_model";
 import { Zeffect } from "../types/types";
 
 export async function findEffectById(id: number): Promise<Zeffect | undefined> {

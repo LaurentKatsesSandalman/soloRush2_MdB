@@ -1,5 +1,5 @@
 import { ResultSetHeader, RowDataPacket } from "mysql2";
-import database from "./db_model.ts";
+import database from "./db_model";
 import { Contrainte } from "../types/types";
 
 export async function findConstraintById(id: number): Promise<Contrainte | undefined> {

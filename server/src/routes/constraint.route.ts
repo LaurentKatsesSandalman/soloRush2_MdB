@@ -2,7 +2,7 @@ import express from "express";
 
 import {
     getThisConstraint
-} from "./../controllers/constraint.controller.ts";
+} from "./../controllers/constraint.controller";
 
 const router = express.Router();
 

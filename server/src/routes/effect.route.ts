@@ -2,7 +2,7 @@ import express from "express";
 
 import {
     getThisEffect
-} from "./../controllers/effect.controller.ts";
+} from "./../controllers/effect.controller";
 
 const router = express.Router();
 
