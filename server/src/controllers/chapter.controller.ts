@@ -11,6 +11,10 @@ export const getThisChapter: RequestHandler = async (req, res, next) => {
         }
         // Fetch a specific chapter based on the provided ID: chapter
         const chapter = await findChapterById(chapterId);
+        if (!chapter){
+            res.status(404).json({ error: 'Pas de Chapitre avec cet Id' });
+            return;
+        }
         //respond with the chapter in JSON format
         res.json(chapter);
     } catch (err) {
